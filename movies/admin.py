@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Genre)
 admin.site.register(Film)
+admin.site.register(Attachment)
