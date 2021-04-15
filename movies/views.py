@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
-from movies.models import *
+from django.views.generic import DetailView, ListView
+from movies.models import Film, Genre, Attachment
+
 
 def index(request):
     """Metoda připravuje pohled pro domovskou stránku - šablona index.html"""
 
     # Uložení celkového počtu filmů v databázi do proměnné num_films
     num_films = Film.objects.all().count()
+
     # Do proměnné films se uloží 3 filmy uspořádané podle hodnocení (sestupně)
     films = Film.objects.order_by('-rate')[:3]
 
@@ -20,6 +22,14 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
+class FilmListView(ListView):
+    model = Film
+
+    context_object_name = 'film_list'
+    template_name = 'film/list.html'
+    paginate_by = 2
+
+
 class FilmDetailView(DetailView):
     model = Film
 
@@ -29,4 +39,3 @@ class FilmDetailView(DetailView):
 
 def topten(request):
     return render(request, 'topten.html')
-
