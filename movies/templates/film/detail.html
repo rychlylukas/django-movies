@@ -21,9 +21,13 @@
         <div class="row">
             <div class="col-md-9">{{ film_detail.plot }}</div>
             <div class="col-md-3">
+                {% if film_detail.poster %}
                 <a href="{{ film_detail.poster.url }}" data-toggle="lightbox" data-gallery="gallery">
                     <img src="{{ film_detail.poster.url }}" class="img-fluid" alt="Plakát k filmu">
                 </a>
+                {% else %}
+                <p class="alert alert-warning">Žádná příloha neexistuje</p>
+                {% endif %}
             </div>
         </div>
     </div>
